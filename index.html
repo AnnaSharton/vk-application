@@ -44,17 +44,37 @@ vkBridge.send('VKWebAppGetAuthToken', {
 			method: 'groups.get',
 			params: {
 				user_id: '5976979',
-                extended: 1,
-                count: 20,
-		v: '5.131',
-		access_token: data.access_token
+                		extended: 1,
+                		count: 30,
+				v: '5.131',
+				access_token: data.access_token
 			}
 		})
 		
 
 		.then((data2) => {
 			if (data2.response) {
-				console.log(data2);
+				var now = new Date();
+			  	var d = now.getDate() +1; //alert(d);
+			  	var m = now.getMonth()+1; //alert(m);
+			  	
+			  
+			    document.getElementById('result1').innerHTML =
+			    'Введите id сообщества в котором хотите поздравить именнинников:' + '<br><br><input id="gr_id" value="128570542">' 
+			    +
+			    'и дату: <input id="day3" value="'+d+'" style="width:15px;">.<input id="month3" value="'+m+'" style="width:15px;"> '
+			    +
+			    '<input type="button" value="Поехали" onclick="get_users(document.getElementById(\'gr_id\').value)"><br><br><br>' +
+			     'Или выберите сообщество (доступны только те сообщества, которые видны у вас всем):<br>';
+
+			    var out = '';
+			    for (var i in data2.response.items) { //собираем список групп пользователя
+			        out += i + ": " + data2.response.items[i].name + '<a href="#" onclick="get_users(' + data2.response.items[i].id + ')">Выбрать</a><br>';
+
+			    }
+			    out_end = '<br><br>';
+
+			    document.getElementById('result1').innerHTML += out + out_end;
 			}
 		})
 
