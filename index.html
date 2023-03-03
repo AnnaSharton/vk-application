@@ -91,15 +91,14 @@ vkBridge.send('VKWebAppGetAuthToken', {
 
 function get_users(group_id) {
 	  	
-	  	d3 = document.getElementById('day3').value; //alert(d3);
-	  	m3 = document.getElementById('month3').value;// alert(m3);
+	  	d3 = document.getElementById('day3').value; 
+	  	m3 = document.getElementById('month3').value;
 	  	
 	  	document.getElementById('result1').style.display = 'none';
 	  	document.getElementById('result2').style.display = 'block';
 	  	document.getElementById('result3').style.display = 'block';
 	 
 
-		
 		VK.api("users.search", {"group_id": group_id, birth_day: d3, birth_month: m3, count:1000,fields: 'photo_id,photo_200'}, function (data2) {
 
 
