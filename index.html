@@ -69,7 +69,7 @@ vkBridge.send('VKWebAppGetAuthToken', {
 
 			    var out = '';
 			    for (var i in data2.response.items) { //собираем список групп пользователя
-			        out += i + ": " + data2.response.items[i].name + '<a href="#" onclick="get_users(' + data2.response.items[i].id + ')"> Выбрать</a><br>';
+			        out += i + ": " + data2.response.items[i].name + ' <a href="#" onclick="get_users(' + data2.response.items[i].id + ')">Выбрать</a><br>';
 
 			    }
 			    out_end = '<br><br>';
