@@ -100,36 +100,52 @@ function get_users(group_id) {
 	document.getElementById('result2').style.display = 'block';
 	document.getElementById('result3').style.display = 'block';
 	 
+	
+	bridge.send('VKWebAppCallAPIMethod', {
+		  method: 'users.get',
+		  params: {
+		    	
+			birth_day: d3, 
+			birth_month: m3, 
+			count:1000,
+			fields: 'photo_id,photo_200'
+	    		v: '5.131',
+	    		access_token: data.access_token
+	}})
+	 	 .then((data) => { 
+	   		 if (data.response) {
+	      		// Метод API выполнен
+	   		 }
+	 	 })
+	  	.catch((error) => {
+	    	console.log(error);
+	  });
 
-		VK.api("users.search", {"group_id": group_id, birth_day: d3, birth_month: m3, count:1000,fields: 'photo_id,photo_200'}, function (data2) {
-
-
-					    //console.log(data2); 
-					    document.getElementById('result2').innerHTML = 
-					    'Сегодня мы спешим поздравить наших сообщников с ДНЕМ РОЖДЕНИЯ!!! ' + "\r\n" + '' + group_id;
-
-
-					    var out = '';
-					    var attachments = '';
-					    var photos = '';
-					    for (var i in data2.response.items) {
-					    	//y=i+1;
-					        out += ' [id'+data2.response.items[i].id+'|' + data2.response.items[i].first_name + ' '+data2.response.items[i].last_name+ 
-					        '] '+
-
-					        '';
-					        if(data2.response.items[i].photo_id != "undefined") {
-					        	attachments += 'photo'+data2.response.items[i].photo_id +',';
-					        	photos += '<a target="_blank" href="'+data2.response.items[i].photo_200+'"><img src="'+data2.response.items[i].photo_200 +'" alt="" width="75"></a>';
-					        }
-
-					    }
-					    document.getElementById('result2').innerHTML += out;
-					    document.getElementById('photos').innerHTML += photos;
-					    document.getElementById('attachments').innerHTML += attachments;
+		console.log(data); 
+		document.getElementById('result2').innerHTML = 
+			'Сегодня мы спешим поздравить наших сообщников с ДНЕМ РОЖДЕНИЯ!!! ' + "\r\n" + '' + group_id;
 
 
-		});
+		var out = '';
+		var attachments = '';
+		var photos = '';
+		for (var i in data2.response.items) {
+			//y=i+1;
+			out += ' [id'+data.response.items[i].id+'|' + data.response.items[i].first_name + ' '+data.response.items[i].last_name+ 
+			'] '+
+			'';
+			if(data.response.items[i].photo_id != "undefined") {
+				attachments += 'photo'+data.response.items[i].photo_id +',';
+				photos += '<a target="_blank" href="'+data.response.items[i].photo_200+'"><img src="'+data.response.items[i].photo_200 +'" alt="" width="75"></a>';
+				}
+
+			}
+		document.getElementById('result2').innerHTML += out;
+		document.getElementById('photos').innerHTML += photos;
+		document.getElementById('attachments').innerHTML += attachments;
+
+
+	});
 
 }	
 </script>
