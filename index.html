@@ -37,6 +37,9 @@ vkBridge.send('VKWebAppGetAuthToken', {
 	app_id: 51559349,
 	scope: 'friends,status'
 })
+
+
+
 .then((data) => {
 	if (data.access_token) {
 
@@ -83,11 +86,16 @@ vkBridge.send('VKWebAppGetAuthToken', {
 		})
 	}
 })
-	
+
+
 
 .catch((error) => {
 	console.log(error);
 })
+
+
+
+
 
 function get_users(group_id) {
 	  	
@@ -112,6 +120,8 @@ function get_users(group_id) {
 	    		v: '5.131',
 	    		access_token: data.access_token
 	}})
+
+
 	 	 .then((data) => { 
 	   		 if (data.response) {
 	      		// Метод API выполнен
