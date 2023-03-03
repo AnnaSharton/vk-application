@@ -31,10 +31,45 @@
 </style>
 <script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script><!--биюлиотека api-->
 <script>
+
+vkBridge.send('VKWebAppInit');
+vkBridge.send('VKWebAppGetAuthToken', {
+	app_id: 51569263,
+	scope: 'friends,status'
+})
+.then((data) => {
+	if (data.access_token) {
+
+		vkBridge.send('VKWebAppCallAPIMethod', {
+			method: 'user.get',
+			params: {
+				user_ids: '5976979, 4195381',
+				v: '5.131',
+				access_token: data.access_token
+			}
+		})
+
+		.then((data2) => {
+			if (data2.response) {
+				console.log(data2);
+			}
+		})
+
+		.catch((error) => {
+			console.log(error);
+		})
+	}
+})
+
+.catch((error) => {
+	console.log(error);
+})
+
+	//https://vk.com/apps?act=manage
 	  VK.init(function() {
 	     // API initialization succeeded
 	     //document.write('ура! пошло! ');
-	    VK.api("groups.get", {"extended": "1", 'count':300}, function (data) {
+	    VK.api("groups.get", {"extended": "1", 'count':300}, function (data) { //не возвращается инфа о группах
 
 			    //console.log(data.response); 
 			    // по умолчанию на завтра
@@ -52,7 +87,7 @@
 			     'Или выберите сообщество (доступны только те сообщества, которые видны у вас всем):<br>';
 
 			    var out = '';
-			    for (var i in data.response.items) {
+			    for (var i in data.response.items) { //собираем список групп пользователя
 			        out += i + ": " + data.response.items[i].name + '<a href="#" onclick="get_users(' + data.response.items[i].id + ')">Выбрать</a><br>';
 
 			    }
@@ -89,7 +124,7 @@ function get_users(group_id) {
 
 					    //console.log(data2); 
 					    document.getElementById('result2').innerHTML = 
-					    'Сегодня мы спешим поздравить наших сообщников с ДНЕМ РОЖДЕНИЯ!!! ' + "\r\n" + '';
+					    'Сегодня мы спешим поздравить наших сообщников с ДНЕМ РОЖДЕНИЯ!!! ' + "\r\n" + '' + group_id;
 
 
 					    var out = '';
