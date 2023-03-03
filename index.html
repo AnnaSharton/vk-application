@@ -41,13 +41,16 @@ vkBridge.send('VKWebAppGetAuthToken', {
 	if (data.access_token) {
 
 		vkBridge.send('VKWebAppCallAPIMethod', {
-			method: 'users.get',
+			method: 'groups.get',
 			params: {
-				user_ids: '5976979, 743784479, 4195381',
-				v: '5.131',
-				access_token: data.access_token
+				user_id: '5976979',
+                extended: 1,
+                count: 20,
+		v: '5.131',
+		access_token: data.access_token
 			}
 		})
+		
 
 		.then((data2) => {
 			if (data2.response) {
