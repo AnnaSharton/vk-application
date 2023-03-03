@@ -51,7 +51,17 @@ vkBridge.send('VKWebAppGetAuthToken', {
 
 		.then((data2) => {
 			if (data2.response) {
-				var now = new Date();
+				console.log(data2);
+			}
+		})
+
+		.catch((error) => {
+			console.log(error);
+		})
+	}
+})
+	
+	var now = new Date();
 			  	var d = now.getDate() +1; //alert(d);
 			  	var m = now.getMonth()+1; //alert(m);
 			  	
@@ -63,15 +73,7 @@ vkBridge.send('VKWebAppGetAuthToken', {
 			    +
 			    '<input type="button" value="Поехали" onclick="get_users(document.getElementById(\'gr_id\').value)"><br><br><br>' +
 			     'Или выберите сообщество (доступны только те сообщества, которые видны у вас всем):<br>';
-				console.log(data2);
-			}
-		})
-
-		.catch((error) => {
-			console.log(error);
-		})
-	}
-})
+	
 
 .catch((error) => {
 	console.log(error);
