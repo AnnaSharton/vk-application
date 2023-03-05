@@ -112,7 +112,7 @@ function get_users(group_id) {
 	bridge.send('VKWebAppCallAPIMethod', {
 		  method: 'users.get',
 		  params: {
-		    	
+		    	bdate: d3+'.'+m3,
 			birth_day: d3, 
 			birth_month: m3, 
 			count:1000,
