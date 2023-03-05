@@ -98,62 +98,47 @@ vkBridge.send('VKWebAppGetAuthToken', {
 
 
 function get_users(group_id) {
+	d3 = document.getElementById('day3').value; //alert(d3);
+	  	m3 = document.getElementById('month3').value;// alert(m3);
 	  	
-	d3 = document.getElementById('day3').value; 
-	console.log(d3);
-	m3 = document.getElementById('month3').value;
-	console.log(m3);
-	
-	document.getElementById('result1').style.display = 'none';
-	document.getElementById('result2').style.display = 'block';
-	document.getElementById('result3').style.display = 'block';
-	 
-	
-	vkBridge.send('VKWebAppCallAPIMethod', {
-		  method: 'users.get',
-		  params: {
-			group_id: group_id,
-		   
-			birth_day: d3, 
-			birth_month: m3, 
-			count:20,
-			fields: 'photo_id,photo_200',
-	    		v: '5.89',
-	    		
-	}})
+	  	// сначала скроем окно выбора группы
+	  	document.getElementById('result1').style.display = 'none';
+	  	document.getElementById('result2').style.display = 'block';
+	  	document.getElementById('result3').style.display = 'block';
 
 
-	 	.then((data) => { 
-	   		 if (data.response) {
-				console.log(data);
-	   		 }
-	 	 })
-	  	.catch((error) => {
-	    	console.log(error);
-	  });
-
-		console.log(data); 
-		document.getElementById('result2').innerHTML = 
-			'Сегодня мы спешим поздравить наших сообщников с ДНЕМ РОЖДЕНИЯ!!! ' + "\r\n" + '' + group_id;
+		
+		VK.api("users.search", {"group_id": group_id, birth_day: d3, birth_month: m3, count:1000,fields: 'photo_id,photo_200'}, function (data2) {
 
 
-		var out = '';
-		var attachments = '';
-		var photos = '';
-		for (var i in data.response.items) {
-			//y=i+1;
-			out += ' [id'+data.response.items[i].id+'|' + data.response.items[i].first_name + ' '+data.response.items[i].last_name+ 
-			'] '+
-			'';
-			if(data.response.items[i].photo_id != "undefined") {
-				attachments += 'photo'+data.response.items[i].photo_id +',';
-				photos += '<a target="_blank" href="'+data.response.items[i].photo_200+'"><img src="'+data.response.items[i].photo_200 +'" alt="" width="75"></a>';
-				}
+					    //console.log(data2); 
+					    document.getElementById('result2').innerHTML = 
+					    'Сегодня мы спешим поздравить наших сообщников с ДНЕМ РОЖДЕНИЯ!!! ' + "\r\n" + '' + group_id;
 
-		}
-		document.getElementById('result2').innerHTML += out;
-		document.getElementById('photos').innerHTML += photos;
-		document.getElementById('attachments').innerHTML += attachments;
+
+					    var out = '';
+					    var attachments = '';
+					    var photos = '';
+					    for (var i in data2.response.items) {
+					    	//y=i+1;
+					        out += ' [id'+data2.response.items[i].id+'|' + data2.response.items[i].first_name + ' '+data2.response.items[i].last_name+ 
+					        '] '+
+
+					        '';
+					        if(data2.response.items[i].photo_id != "undefined") {
+					        	attachments += 'photo'+data2.response.items[i].photo_id +',';
+					        	photos += '<a target="_blank" href="'+data2.response.items[i].photo_200+'"><img src="'+data2.response.items[i].photo_200 +'" alt="" width="75"></a>';
+					        }
+
+					    }
+					    document.getElementById('result2').innerHTML += out;
+					    document.getElementById('photos').innerHTML += photos;
+					    document.getElementById('attachments').innerHTML += attachments;
+
+
+		});
+
+
 
 
 
