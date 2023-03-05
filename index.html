@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!--для адаптивности под моб-->
 </head>
 <body>
-23232323232
+444444444
 <div id="result1"></div><!--блок для результатов 1го шага-->
 <textarea id="result2" style="display: none;">Идет загрузка именинников...</textarea><!-- 2го шага-->
 <div id="photos"></div>
@@ -112,6 +112,7 @@ function get_users(group_id) {
 	bridge.send('VKWebAppCallAPIMethod', {
 		  method: 'users.get',
 		  params: {
+			group_id: group_id,
 		    	bdate: d3+'.'+m3,
 			count:20,
 			fields: 'photo_id,photo_200',
