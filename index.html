@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!--для адаптивности под моб-->
 </head>
 <body>
-888
+999999
 <div id="result1"></div><!--блок для результатов 1го шага-->
 <textarea id="result2" style="display: none;">Идет загрузка именинников...</textarea><!-- 2го шага-->
 <div id="photos"></div>
@@ -122,16 +122,16 @@ function get_users(group_id) {
 	}})
 
 
-	 	 .then((data3) => { 
-	   		 if (data3.response) {
-				console.log(data3);
+	 	.then((data) => { 
+	   		 if (data.response) {
+				console.log(data);
 	   		 }
 	 	 })
 	  	.catch((error) => {
 	    	console.log(error);
 	  });
 
-		console.log(data3); 
+		console.log(data); 
 		document.getElementById('result2').innerHTML = 
 			'Сегодня мы спешим поздравить наших сообщников с ДНЕМ РОЖДЕНИЯ!!! ' + "\r\n" + '' + group_id;
 
@@ -139,14 +139,14 @@ function get_users(group_id) {
 		var out = '';
 		var attachments = '';
 		var photos = '';
-		for (var i in data3.response.items) {
+		for (var i in data.response.items) {
 			//y=i+1;
-			out += ' [id'+data3.response.items[i].id+'|' + data3.response.items[i].first_name + ' '+data3.response.items[i].last_name+ 
+			out += ' [id'+data.response.items[i].id+'|' + data.response.items[i].first_name + ' '+data.response.items[i].last_name+ 
 			'] '+
 			'';
-			if(data3.response.items[i].photo_id != "undefined") {
-				attachments += 'photo'+data3.response.items[i].photo_id +',';
-				photos += '<a target="_blank" href="'+data3.response.items[i].photo_200+'"><img src="'+data3.response.items[i].photo_200 +'" alt="" width="75"></a>';
+			if(data.response.items[i].photo_id != "undefined") {
+				attachments += 'photo'+data.response.items[i].photo_id +',';
+				photos += '<a target="_blank" href="'+data.response.items[i].photo_200+'"><img src="'+data.response.items[i].photo_200 +'" alt="" width="75"></a>';
 				}
 
 		}
